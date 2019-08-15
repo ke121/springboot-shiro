@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.shirodemo.shiro.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.tom.shirodemo.shiro.bean.Permission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="permisson_name" property="permissonName" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="permisson" property="permisson" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, permisson_name, menu_id, permisson, status, creator
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shiro_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getPermissionByRoleId" resultType="com.tom.shirodemo.shiro.bean.Permission">
+    SELECT
+	spm.id,
+	spm.permission_name permissionName,
+	spm.menu_id,
+	spm.permission,
+	spm. STATUS,
+	spm.creator
+from shiro_permission spm
+WHERE
+	spm.id in (SELECT
+	srp.permission_id
+FROM
+	shiro_role sr,
+	shiro_role_permission srp
+WHERE
+	sr.id = srp.role_id
+	and sr.id = #{id}
+	)
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shiro_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tom.shirodemo.shiro.bean.Permission" >
+    insert into shiro_permission (id, permisson_name, menu_id, 
+      permisson, status, creator
+      )
+    values (#{id,jdbcType=INTEGER}, #{permissonName,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, 
+      #{permisson,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tom.shirodemo.shiro.bean.Permission" >
+    insert into shiro_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="permissonName != null" >
+        permisson_name,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="permisson != null" >
+        permisson,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permissonName != null" >
+        #{permissonName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="permisson != null" >
+        #{permisson,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tom.shirodemo.shiro.bean.Permission" >
+    update shiro_permission
+    <set >
+      <if test="permissonName != null" >
+        permisson_name = #{permissonName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="permisson != null" >
+        permisson = #{permisson,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tom.shirodemo.shiro.bean.Permission" >
+    update shiro_permission
+    set permisson_name = #{permissonName,jdbcType=VARCHAR},
+      menu_id = #{menuId,jdbcType=VARCHAR},
+      permisson = #{permisson,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

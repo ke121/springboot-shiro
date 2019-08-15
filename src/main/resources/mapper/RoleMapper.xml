@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tom.shirodemo.shiro.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.tom.shirodemo.shiro.bean.Role" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="cretor" property="cretor" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_name, status, cretor, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shiro_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="getRolesByUserName" resultType="com.tom.shirodemo.shiro.bean.Role">
+      SELECT
+	sr.id,
+	sr.role_name roleName,
+	sr. STATUS,
+	sr.cretor,
+	sr.remark
+FROM
+	shiro_role sr
+WHERE
+	sr.id in (
+		SELECT
+			ur.role_id
+		FROM
+			shiro_user su,
+			shiro_user_role ur
+		WHERE
+			su.id = ur.user_id
+		AND su.username = #{username}
+	)
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shiro_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tom.shirodemo.shiro.bean.Role" >
+    insert into shiro_role (id, role_name, status, 
+      cretor, remark)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{cretor,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tom.shirodemo.shiro.bean.Role" >
+    insert into shiro_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="cretor != null" >
+        cretor,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cretor != null" >
+        #{cretor,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tom.shirodemo.shiro.bean.Role" >
+    update shiro_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cretor != null" >
+        cretor = #{cretor,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tom.shirodemo.shiro.bean.Role" >
+    update shiro_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      cretor = #{cretor,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
