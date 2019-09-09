@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tom.shirodemo.shiro.mapper.MenuMapper">
+    <resultMap id="baseResultMap" type="com.tom.shirodemo.shiro.bean.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="text" property="text" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+        <result column="checked" property="checked" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="creator" property="creator" jdbcType="VARCHAR"/>
+        <result column="remarker" property="remarker" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getMenusByRoleId" resultMap="baseResultMap">
+          SELECT
+	*
+FROM
+	shiro_menu
+WHERE
+	id IN (
+		SELECT
+			srm.id
+		FROM
+			shiro_role sr,
+			shiro_role_menu srm
+		WHERE
+			sr.id = srm.role_id
+		AND sr.id = #{roleId}
+	)
+    </select>
+
+    <select id="getMenuByPId" resultMap="baseResultMap">
+        select * from shiro_menu where parent_id=#{id}
+    </select>
+
+    <insert id="addMenu" parameterType="com.tom.shirodemo.shiro.bean.Menu">
+        INSERT INTO shiro_menu (
+	text,
+	url,
+	parent_id,
+	create_time,
+	state,
+	description,
+	creator,
+	remarker,
+	checked
+)
+VALUES
+	(#{text},#{url},#{parentId},#{createTime},#{state},#{Description},#{creator},#{remarker},'1')
+    </insert>
+
+    <select id="getAllMenu"  resultMap="baseResultMap">
+        select * from shiro_menu
+    </select>
+
+    <update id="updateMenu" parameterType="com.tom.shirodemo.shiro.bean.Menu">
+        update shiro_menu set text  = #{text} ,url = #{url} , remarker = #{remarker} where id = #{id}
+    </update>
+</mapper>
