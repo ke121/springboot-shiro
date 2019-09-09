@@ -133,7 +133,7 @@
   font-size: 14px;
 }
 .panel-title {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   color: #0E2D5F;
   height: 20px;
@@ -1386,7 +1386,7 @@
   margin-top: -8px;
 }
 .tabs-title {
-  font-size: 14px;
+  font-size: 12px;
 }
 .tabs-closable {
   padding-right: 8px;
@@ -1762,13 +1762,13 @@
   overflow: hidden;
   height: 18px;
   line-height: 18px;
-  font-size: 14px;
+  font-size: 10px;
 }
 .datagrid-header .datagrid-cell {
   height: auto;
 }
 .datagrid-header .datagrid-cell span {
-  font-size: 14px;
+  font-size: 12px;
 }
 .datagrid-cell-group {
   text-align: center;
@@ -3067,7 +3067,7 @@
   background: url('images/tree_icons.png') no-repeat -240px -18px;
 }
 .tree-title {
-  font-size: 14px;
+  font-size: 12px;
   display: inline-block;
   text-decoration: none;
   vertical-align: middle;

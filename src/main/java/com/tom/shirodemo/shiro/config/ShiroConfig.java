@@ -31,6 +31,16 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig{
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+        FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
+        filterRegistration.setFilter(new DelegatingFilterProxy("shiroFilter"));
+        filterRegistration.setEnabled(true);
+        filterRegistration.addUrlPatterns("/*");
+        filterRegistration.setDispatcherTypes(DispatcherType.REQUEST);
+        return filterRegistration;
+    }
+
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shirofilter(SecurityManager manager){
         ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean() ;
@@ -52,7 +62,7 @@ public class ShiroConfig{
         map.put("/images/**", "anon");
         map.put("/hello", "anon") ;
         map.put("/login","anon" ) ;
-        map.put("/logout","authc" ) ;
+        map.put("/logout", "logout") ;
         map.put("/**", "authc") ;
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean ;
