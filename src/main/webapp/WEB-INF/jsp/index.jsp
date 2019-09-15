@@ -12,6 +12,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@include file="../../common/taglib/taglib.jsp" %>
 <html>
 <head>
     <title>hello</title>
