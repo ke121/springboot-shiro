@@ -56,7 +56,7 @@ public class MenuServiceImpl implements MenuService{
         menu.setCreator(user.getUsername());
         if((mapper.addMenu(menu))>0){
             resultBean.success("操作成功") ;
-            treeService.refreshSysTree(); ;
+            treeService.refreshSysTree();
         }else {
             resultBean.fail("操作失败") ;
         }
@@ -78,6 +78,7 @@ public class MenuServiceImpl implements MenuService{
         menu.setRemarker(remarker);
         if((mapper.updateMenu(menu))>0){
             resultBean.success("操作成功") ;
+            treeService.refreshSysTree();
         }else {
             resultBean.fail("操作失败") ;
         }

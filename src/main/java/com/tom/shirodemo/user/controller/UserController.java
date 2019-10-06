@@ -36,5 +36,17 @@ public class UserController {
         return permissionService.getPermissionByRoleId(id) ;
     }
 
+    @RequestMapping("/user/getip")
+    public String StringgetIp(){
+        String ip = null;
+        try {
+            ip =  "ip:"+java.net.InetAddress.getLocalHost().getHostAddress() ;
+            System.out.println("===========" +  ip);
+        }catch (Exception e){
+
+        }
+        return ip ;
+    }
+
 }
 

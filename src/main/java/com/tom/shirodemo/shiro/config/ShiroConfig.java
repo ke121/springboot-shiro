@@ -88,6 +88,7 @@ public class ShiroConfig{
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager() ;
         defaultWebSecurityManager.setRealm(realm);
         defaultWebSecurityManager.setCacheManager(ehCacheManager);
+        //实现tomcat集群session共享，暂时先注释掉shiro的session管理
         defaultWebSecurityManager.setSessionManager(sessionManager);
         return defaultWebSecurityManager ;
     }
