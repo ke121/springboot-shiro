@@ -59,6 +59,17 @@
         </dependency>
 
         <dependency>
+            <groupId> org.springframework.boot </groupId>
+            <artifactId> spring-boot-configuration-processor </artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -85,7 +96,6 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <!-- JSTL (JSP standard Tag Library) JSP 标准标签库 -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -102,10 +112,15 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.eclipse.jdt</groupId>-->
+            <!--<artifactId>ecj</artifactId>-->
+            <!--<version>3.12.3</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.eclipse.jdt</groupId>
-            <artifactId>ecj</artifactId>
-            <version>3.12.3</version>
+            <groupId>org.crazycake</groupId>
+            <artifactId>shiro-redis</artifactId>
+            <version>3.2.3</version>
         </dependency>
     </dependencies>
     <!-- 添加这个就可以是webapp目录生效 -->

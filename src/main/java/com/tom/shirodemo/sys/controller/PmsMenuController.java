@@ -2,7 +2,7 @@ package com.tom.shirodemo.sys.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tom.shirodemo.common.ResultBean;
+import com.tom.shirodemo.common.bean.ResultBean;
 import com.tom.shirodemo.shiro.service.MenuService;
 import com.tom.shirodemo.sys.bean.MenuVO;
 import org.springframework.beans.factory.annotation.Autowired;

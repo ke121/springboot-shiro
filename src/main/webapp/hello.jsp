@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    hello
+    <a href="http://localhost:8080/shirodemo/index">访问localhost8080</a><br>
+    <a href="http://localhost:8081/shirodemo/index">访问localhost8081</a>
 </body>
 </html>

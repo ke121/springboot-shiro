@@ -25,4 +25,9 @@ public class AdminController {
     public String test() throws Exception{
         return "ip:"+java.net.InetAddress.getLocalHost().getHostAddress() ;
     }
+
+    @RequestMapping("/signtest")
+    public String signtest(String test){
+        return test ;
+    }
 }

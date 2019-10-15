@@ -1,6 +1,6 @@
 package com.tom.shirodemo.shiro.service;
 
-import com.tom.shirodemo.common.ResultBean;
+import com.tom.shirodemo.common.bean.ResultBean;
 import com.tom.shirodemo.shiro.bean.Menu;
 import com.tom.shirodemo.sys.bean.MenuVO;
 

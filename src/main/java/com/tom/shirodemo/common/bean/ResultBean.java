@@ -1,4 +1,4 @@
-package com.tom.shirodemo.common;
+package com.tom.shirodemo.common.bean;
 
 import java.io.Serializable;
 
@@ -38,6 +38,12 @@ public class ResultBean implements Serializable {
 
     public ResultBean fail(String msg){
         this.code = "400" ;
+        this.msg = msg ;
+        return this ;
+    }
+
+    public ResultBean fail(String msg,String code){
+        this.code = code ;
         this.msg = msg ;
         return this ;
     }
